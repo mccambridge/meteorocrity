@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveDict } from 'meteor/reactive-dict';
 import { Todos } from '../api/todos.js';
  
 import './todo.html';
@@ -6,6 +7,7 @@ import './body.html';
 
 Template.body.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
+  Meteor.subscribe('todos');
 });
  
 Template.body.helpers({
@@ -40,11 +42,7 @@ Template.body.events({
       return;
     }
  
-    // Insert a task into the collection
-    Todos.insert({
-      text,
-      createdAt: new Date(), // current time
-    });
+    Meteor.call('todos.insert', text);
  
     // Clear form
     target.text.value = '';

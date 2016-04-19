@@ -7,10 +7,14 @@
         <input type="checkbox" />
         Hide Completed Tasks
       </label>
- 
-      <form class="new-todo">
-        <input type="text" name="text" placeholder="Type to add new todos" />
-      </form>
+
+      {{> loginButtons}}
+
+      {{#if currentUser}}
+        <form class="new-todo">
+          <input type="text" name="text" placeholder="Type to add new todos" />
+        </form>
+      {{/if}}
     </header>
  
     <ul>
